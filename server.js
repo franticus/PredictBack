@@ -54,7 +54,6 @@ app.post('/data', cors(corsOptions), (req, res) => {
     const ip = req.clientIp;
     const geo = geoip.lookup(ip);
     const country = geo ? geo.country : 'Unknown';
-    console.log('country:', country);
 
     const newEntry = {
       name: req.body.name,
