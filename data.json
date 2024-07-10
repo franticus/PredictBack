@@ -9,5 +9,16 @@
     "team1Code": "DE",
     "team2Code": "BY",
     "country": "Unknown"
+  },
+  {
+    "name": "wtq",
+    "phone": "2345",
+    "timestamp": "2024-07-10T14:26:59.551Z",
+    "choice": "p2",
+    "score1": "2",
+    "score2": "4",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "Unknown"
   }
 ]

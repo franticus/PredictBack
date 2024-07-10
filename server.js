@@ -52,8 +52,10 @@ app.post('/data', cors(corsOptions), (req, res) => {
   try {
     const data = readData();
     const ip = req.clientIp;
+    console.log('Client IP:', ip); // Добавьте лог для IP
     const geo = geoip.lookup(ip);
-    const country = geo ? geo.country : 'Unknown';
+    console.log('Geo information:', geo); // Добавьте лог для гео-информации
+    const country = geo && geo.country ? geo.country : 'Unknown';
 
     const newEntry = {
       name: req.body.name,
