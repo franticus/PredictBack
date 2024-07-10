@@ -3,13 +3,9 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
-const requestIp = require('request-ip');
-const geoip = require('geoip-lite');
-const axios = require('axios');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(requestIp.mw());
 
 const corsOptions = {
   origin: '*',
@@ -49,25 +45,10 @@ app.get('/data', cors(corsOptions), (req, res) => {
   res.json(data);
 });
 
-app.post('/data', cors(corsOptions), async (req, res) => {
+app.post('/data', cors(corsOptions), (req, res) => {
   try {
     const data = readData();
-    const ip = req.clientIp;
-
-    let country = 'Unknown';
-
-    // Получение публичного IP-адреса
-    const response = await axios.get('https://api.ipify.org?format=json');
-    const publicIp = response.data.ip;
-    console.log('publicIp:', publicIp);
-
-    if (publicIp) {
-      const geo = geoip.lookup(publicIp);
-      if (geo) {
-        country = geo.country;
-        console.log('country:', country);
-      }
-    }
+    console.log('data:', data);
 
     const newEntry = {
       name: req.body.name,
@@ -78,7 +59,7 @@ app.post('/data', cors(corsOptions), async (req, res) => {
       score2: req.body.score2,
       team1Code: req.body.team1Code,
       team2Code: req.body.team2Code,
-      country: country,
+      country: req.body.country,
     };
 
     data.push(newEntry);
