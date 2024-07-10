@@ -20,5 +20,27 @@
     "team1Code": "DE",
     "team2Code": "BY",
     "country": "Unknown"
+  },
+  {
+    "name": "wtq",
+    "phone": "2345444",
+    "timestamp": "2024-07-10T14:37:47.530Z",
+    "choice": "p2",
+    "score1": "2",
+    "score2": "4",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "Unknown"
+  },
+  {
+    "name": "укеу",
+    "phone": "23636",
+    "timestamp": "2024-07-10T14:38:19.620Z",
+    "choice": "p2",
+    "score1": "2",
+    "score2": "4",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "Unknown"
   }
 ]

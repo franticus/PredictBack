@@ -51,7 +51,15 @@ app.get('/data', cors(corsOptions), (req, res) => {
 app.post('/data', cors(corsOptions), (req, res) => {
   try {
     const data = readData();
-    const ip = req.clientIp;
+    let ip = req.clientIp;
+
+    // Попробуйте получить реальный IP из заголовков, если сервер за прокси
+    const forwardedIpsStr = req.headers['x-forwarded-for'];
+    if (forwardedIpsStr) {
+      const forwardedIps = forwardedIpsStr.split(',');
+      ip = forwardedIps[0];
+    }
+
     console.log('Client IP:', ip); // Добавьте лог для IP
     const geo = geoip.lookup(ip);
     console.log('Geo information:', geo); // Добавьте лог для гео-информации
