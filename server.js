@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const requestIp = require('request-ip');
 const geoip = require('geoip-lite');
+const axios = require('axios');
 
 const app = express();
 app.use(bodyParser.json());
@@ -48,22 +49,25 @@ app.get('/data', cors(corsOptions), (req, res) => {
   res.json(data);
 });
 
-app.post('/data', cors(corsOptions), (req, res) => {
+app.post('/data', cors(corsOptions), async (req, res) => {
   try {
     const data = readData();
-    let ip = req.clientIp;
+    const ip = req.clientIp;
 
-    // Попробуйте получить реальный IP из заголовков, если сервер за прокси
-    const forwardedIpsStr = req.headers['x-forwarded-for'];
-    if (forwardedIpsStr) {
-      const forwardedIps = forwardedIpsStr.split(',');
-      ip = forwardedIps[0];
+    let country = 'Unknown';
+
+    // Получение публичного IP-адреса
+    const response = await axios.get('https://api.ipify.org?format=json');
+    const publicIp = response.data.ip;
+    console.log('publicIp:', publicIp);
+
+    if (publicIp) {
+      const geo = geoip.lookup(publicIp);
+      if (geo) {
+        country = geo.country;
+        console.log('country:', country);
+      }
     }
-
-    console.log('Client IP:', ip); // Добавьте лог для IP
-    const geo = geoip.lookup(ip);
-    console.log('Geo information:', geo); // Добавьте лог для гео-информации
-    const country = geo && geo.country ? geo.country : 'Unknown';
 
     const newEntry = {
       name: req.body.name,

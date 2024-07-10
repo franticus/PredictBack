@@ -42,5 +42,38 @@
     "team1Code": "DE",
     "team2Code": "BY",
     "country": "Unknown"
+  },
+  {
+    "name": "укеу",
+    "phone": "23636",
+    "timestamp": "2024-07-10T14:43:28.904Z",
+    "choice": "p2",
+    "score1": "2",
+    "score2": "4",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "BY"
+  },
+  {
+    "name": "qetw",
+    "phone": "345626",
+    "timestamp": "2024-07-10T14:44:02.535Z",
+    "choice": "p2",
+    "score1": "2",
+    "score2": "4",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "BY"
+  },
+  {
+    "name": "qetw",
+    "phone": "345626",
+    "timestamp": "2024-07-10T14:44:18.696Z",
+    "choice": "p2",
+    "score1": "2",
+    "score2": "4",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "BY"
   }
 ]
