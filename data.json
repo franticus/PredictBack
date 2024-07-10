@@ -9,5 +9,38 @@
     "team1Code": "ES",
     "team2Code": "BY",
     "country": "Belarus"
+  },
+  {
+    "name": "sdfsd",
+    "phone": "2342",
+    "timestamp": "2024-07-10T11:05:15.139Z",
+    "choice": "p1",
+    "score1": "2",
+    "score2": "1",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "Belarus"
+  },
+  {
+    "name": "ыаав",
+    "phone": "123",
+    "timestamp": "2024-07-10T11:15:56.300Z",
+    "choice": "p1",
+    "score1": "2",
+    "score2": "1",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "Belarus"
+  },
+  {
+    "name": "ыаавerww",
+    "phone": "12323",
+    "timestamp": "2024-07-10T11:19:06.173Z",
+    "choice": "p1",
+    "score1": "2",
+    "score2": "1",
+    "team1Code": "DE",
+    "team2Code": "BY",
+    "country": "Belarus"
   }
 ]

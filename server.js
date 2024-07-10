@@ -7,11 +7,16 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 4242;
 
-// Middleware для обработки JSON
 app.use(bodyParser.json());
 
-// Разрешение CORS
-app.use(cors());
+// Настройка CORS
+const corsOptions = {
+  origin: '*', // Или укажите конкретные разрешенные домены, например: ['http://example.com', 'http://anotherdomain.com']
+  methods: 'GET,POST,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 
 // Путь к файлу JSON
 const DATA_FILE = path.join(__dirname, 'data.json');
@@ -40,24 +45,16 @@ const writeData = data => {
 };
 
 // Middleware для обработки предварительных запросов (preflight requests)
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  next();
-});
+app.options('*', cors(corsOptions));
 
 // Маршрут для получения данных
-app.get('/data', (req, res) => {
+app.get('/data', cors(corsOptions), (req, res) => {
   const data = readData();
   res.json(data);
 });
 
 // Маршрут для добавления данных
-app.post('/data', (req, res) => {
+app.post('/data', cors(corsOptions), (req, res) => {
   try {
     const data = readData();
     const newEntry = {
