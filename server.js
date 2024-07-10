@@ -3,9 +3,12 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const requestIp = require('request-ip');
+const geoip = require('geoip-lite');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(requestIp.mw());
 
 const corsOptions = {
   origin: '*',
@@ -48,6 +51,10 @@ app.get('/data', cors(corsOptions), (req, res) => {
 app.post('/data', cors(corsOptions), (req, res) => {
   try {
     const data = readData();
+    const ip = req.clientIp;
+    const geo = geoip.lookup(ip);
+    const country = geo ? geo.country : 'Unknown';
+
     const newEntry = {
       name: req.body.name,
       phone: req.body.phone,
@@ -57,8 +64,9 @@ app.post('/data', cors(corsOptions), (req, res) => {
       score2: req.body.score2,
       team1Code: req.body.team1Code,
       team2Code: req.body.team2Code,
-      country: req.body.country,
+      country: country,
     };
+
     data.push(newEntry);
     writeData(data);
     res.status(201).json(newEntry);
