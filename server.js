@@ -5,23 +5,18 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 4242;
-
 app.use(bodyParser.json());
 
-// Настройка CORS
 const corsOptions = {
-  origin: '*', // Или укажите конкретные разрешенные домены, например: ['http://example.com', 'http://anotherdomain.com']
+  origin: '*',
   methods: 'GET,POST,OPTIONS',
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
 
-// Путь к файлу JSON
 const DATA_FILE = path.join(__dirname, 'data.json');
 
-// Функция для чтения данных из файла JSON
 const readData = () => {
   try {
     if (!fs.existsSync(DATA_FILE)) {
@@ -35,7 +30,6 @@ const readData = () => {
   }
 };
 
-// Функция для записи данных в файл JSON
 const writeData = data => {
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
@@ -44,16 +38,13 @@ const writeData = data => {
   }
 };
 
-// Middleware для обработки предварительных запросов (preflight requests)
 app.options('*', cors(corsOptions));
 
-// Маршрут для получения данных
 app.get('/data', cors(corsOptions), (req, res) => {
   const data = readData();
   res.json(data);
 });
 
-// Маршрут для добавления данных
 app.post('/data', cors(corsOptions), (req, res) => {
   try {
     const data = readData();
@@ -77,7 +68,7 @@ app.post('/data', cors(corsOptions), (req, res) => {
   }
 });
 
-// Запуск сервера
+const PORT = 4242;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
